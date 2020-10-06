@@ -1,1 +1,0 @@
-C:\Users\LeoDo\Desktop\DevFrame\ExampleExtension\build\classes\kotlin\main\example\plugin\ExamplePlugin.class
