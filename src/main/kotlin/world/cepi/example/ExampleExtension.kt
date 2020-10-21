@@ -1,4 +1,4 @@
-package example.extension
+package world.cepi.example
 
 import net.minestom.server.extensions.Extension;
 

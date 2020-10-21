@@ -1,5 +1,5 @@
 {
-  "entrypoint": "example.extension.ExampleExtension",
+  "entrypoint": "world.cepi.example.ExampleExtension",
   "name": "Example extension",
   "version": "1.0.0-EXAMPLE"
 }
