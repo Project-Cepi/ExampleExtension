@@ -28,17 +28,8 @@ dependencies {
     // Use the Kotlin reflect library.
     implementation(kotlin("reflect"))
 
-    // Use the JUpiter test library.
-    testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
-
     // Compile Minestom into project
     implementation("com.github.Minestom:Minestom:master-SNAPSHOT")
-
-    // Use the Netty library
-    implementation("io.netty:netty-transport-native-epoll:4.1.52.Final")
-
-    // KHTTP
-    implementation("khttp:khttp:1.0.0")
 
     // Implement Klaxon
     implementation("com.beust:klaxon:5.0.1")
