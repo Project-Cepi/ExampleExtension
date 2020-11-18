@@ -33,6 +33,9 @@ dependencies {
 
     // Implement Klaxon
     implementation("com.beust:klaxon:5.0.1")
+
+    // OkHttp Client
+    implementation("com.squareup.okhttp3", "okhttp", "4.9.0")
 }
 
 tasks.withType<Test> {
