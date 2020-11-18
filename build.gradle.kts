@@ -29,7 +29,7 @@ dependencies {
     implementation(kotlin("reflect"))
 
     // Compile Minestom into project
-    implementation("com.github.Minestom:Minestom:master-SNAPSHOT")
+    implementation("com.github.Minestom:Minestom:142b6a6")
 
     // Implement Klaxon
     implementation("com.beust:klaxon:5.0.1")
