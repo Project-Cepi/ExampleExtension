@@ -1,6 +1,7 @@
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.4.10"
+    kotlin("plugin.serialization") version "1.4.10"
 
     // Apply the application plugin to add support for building a jar
     java
@@ -29,13 +30,13 @@ dependencies {
     implementation(kotlin("reflect"))
 
     // Compile Minestom into project
-    implementation("com.github.Minestom:Minestom:142b6a6")
+    implementation("com.github.Minestom:Minestom:-SNAPSHOT")
 
-    // Implement Klaxon
-    implementation("com.beust:klaxon:5.0.1")
-
-    // OkHttp Client
+    // OkHttp
     implementation("com.squareup.okhttp3", "okhttp", "4.9.0")
+
+    // import kotlinx serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
 }
 
 tasks.withType<Test> {
