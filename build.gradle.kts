@@ -1,11 +1,13 @@
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.4.10"
-    kotlin("plugin.serialization") version "1.4.10"
+    id("org.jetbrains.kotlin.jvm") version "1.4.21"
+    kotlin("plugin.serialization") version "1.4.21"
+    id("com.github.johnrengelman.shadow") version "6.1.0"
     maven
 
     // Apply the application plugin to add support for building a jar
     java
+    id("org.jetbrains.dokka") version "1.4.20"
 }
 
 repositories {
@@ -22,26 +24,40 @@ repositories {
 
 dependencies {
     // Align versions of all Kotlin components
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
+    compileOnly(platform("org.jetbrains.kotlin:kotlin-bom"))
 
     // Use the Kotlin JDK 8 standard library.
-    implementation(kotlin("stdlib"))
+    compileOnly(kotlin("stdlib"))
 
     // Use the Kotlin reflect library.
-    implementation(kotlin("reflect"))
+    compileOnly(kotlin("reflect"))
 
     // Compile Minestom into project
-    implementation("com.github.Minestom:Minestom:-SNAPSHOT")
+    compileOnly("com.github.Minestom:Minestom:-SNAPSHOT")
 
     // OkHttp
-    implementation("com.squareup.okhttp3", "okhttp", "4.9.0")
+    compileOnly("com.squareup.okhttp3", "okhttp", "4.9.0")
 
     // import kotlinx serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks {
+    named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+        archiveBaseName.set("example")
+        mergeServiceFiles()
+        minimize()
+
+    }
+
+    test { useJUnitPlatform() }
+
+    build { dependsOn(shadowJar) }
+
 }
 
 java {
