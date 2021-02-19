@@ -41,7 +41,7 @@ dependencies {
     compileOnly("com.squareup.okhttp3", "okhttp", "4.9.0")
 
     // import kotlinx serialization
-    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 }
 
 tasks.withType<Test> {
