@@ -49,8 +49,14 @@ tasks.withType<Test> {
 }
 
 tasks {
+    processResources {
+        filesMatching("extension.json") {
+            expand(project.properties)
+        }
+    }
+
     named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
-        archiveBaseName.set("example")
+        archiveBaseName.set(project.name)
         mergeServiceFiles()
         minimize()
 
