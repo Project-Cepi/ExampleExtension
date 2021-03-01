@@ -25,12 +25,12 @@ jobs:
         run: ./gradlew build
       - name: Build with Gradle
         run: ./gradlew dokkaHtml
-          - name: Deploy API documentation to Github Pages
-            uses: JamesIves/github-pages-deploy-action@3.7.1
-            with:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              BRANCH: gh-pages
-              FOLDER: build/dokka/html
+      - name: Deploy API documentation to Github Pages
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build/dokka/html
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
