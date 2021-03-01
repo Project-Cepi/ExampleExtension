@@ -1,15 +1,21 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.4.30"
+    // Kotlinx serialization for any data format
     kotlin("plugin.serialization") version "1.4.21"
+    // Shade the plugin
     id("com.github.johnrengelman.shadow") version "6.1.0"
+    // Add maven support
     maven
+    // Allow publishing
     `maven-publish`
 
     // Apply the application plugin to add support for building a jar
     java
+    // Dokka documentation w/ kotlin
     id("org.jetbrains.dokka") version "1.4.20"
 }
 
@@ -49,22 +55,25 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+// Take gradle.properties and apply it to resources.
 tasks {
     processResources {
+        // Apply properties to extension.json
         filesMatching("extension.json") {
             expand(project.properties)
         }
     }
 
-    named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+    // Set name, minimize, and merge service files
+    named<ShadowJar>("shadowJar") {
         archiveBaseName.set(project.name)
         mergeServiceFiles()
         minimize()
-
     }
 
     test { useJUnitPlatform() }
 
+    // Make build depend on shadowJar as shading dependencies will most likely be required.
     build { dependsOn(shadowJar) }
 
 }
@@ -82,12 +91,8 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            /** Configure path of your package repository on Github
-             *  Replace GITHUB_USERID with your/organisation Github userID and REPOSITORY with the repository name on GitHub
-             */
             url = uri("https://maven.pkg.github.com/${System.getenv("GITHUB_OWNER")}/${System.getenv("GITHUB_REPO")}") // Github Package
             credentials {
-                //Fetch these details from the properties file or from Environment variables
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
             }
