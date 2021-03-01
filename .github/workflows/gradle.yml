@@ -1,4 +1,4 @@
-name: Minestom Gradle CI
+name: Gradle CI
 
 defaults:
   run:
@@ -25,3 +25,26 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
+      - name: Build with Gradle
+        run: ./gradlew dokkaHtml
+          - name: Deploy API documentation to Github Pages
+            uses: JamesIves/github-pages-deploy-action@3.7.1
+            with:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              BRANCH: gh-pages
+              FOLDER: build/dokka/html
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            LICENSE.md
+            build/libs/*.jar
+      - name: Publish package
+        run: ./gradlew publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_OWNER: ${{ github.repository_owner }}
+          GITHUB_REPO: ${{ secrets.REPO }}
