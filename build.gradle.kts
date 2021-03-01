@@ -6,6 +6,7 @@ plugins {
     kotlin("plugin.serialization") version "1.4.21"
     id("com.github.johnrengelman.shadow") version "6.1.0"
     maven
+    `maven-publish`
 
     // Apply the application plugin to add support for building a jar
     java
@@ -73,5 +74,23 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
+
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            /** Configure path of your package repository on Github
+             *  Replace GITHUB_USERID with your/organisation Github userID and REPOSITORY with the repository name on GitHub
+             */
+            url = uri("https://maven.pkg.github.com/${System.getenv("GITHUB_OWNER")}/${System.getenv("GITHUB_REPO")}") // Github Package
+            credentials {
+                //Fetch these details from the properties file or from Environment variables
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}
