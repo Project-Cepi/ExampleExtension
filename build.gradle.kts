@@ -99,3 +99,60 @@ publishing {
         }
     }
 }
+
+val sourcesJar by tasks.creating(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets.getByName("main").allSource)
+    from("LICENCE.md") {
+        into("META-INF")
+    }
+}
+
+val dokkaJavadocJar by tasks.creating(Jar::class) {
+    dependsOn(tasks.dokkaJavadoc)
+    from(tasks.dokkaJavadoc.get().outputDirectory.get())
+    archiveClassifier.set("javadoc")
+}
+
+
+
+publishing {
+    publications {
+        register("gprRelease", MavenPublication::class) {
+            groupId = project.group.toString()
+            artifactId = rootProject.name
+            version = project.version.toString()
+
+            from(components["java"])
+
+            artifact(sourcesJar)
+            artifact(dokkaJavadocJar)
+
+            pom {
+                packaging = "jar"
+                name.set(rootProject.name)
+                description.set("An Example extension for Minestom")
+                url.set("https://github.com/${System.getenv("GITHUB_OWNER")}/${System.getenv("GITHUB_REPO")}")
+                scm {
+                    url.set("https://github.com/${System.getenv("GITHUB_OWNER")}/${System.getenv("GITHUB_REPO")}")
+                }
+                issueManagement {
+                    url.set("https://github.com/${System.getenv("GITHUB_OWNER")}/${System.getenv("GITHUB_REPO")}/issues")
+                }
+                licenses {
+                    license {
+                        name.set("MIT License") // Change when needed
+                        url.set("https://opensource.org/licenses/MIT")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set(System.getenv("GITHUB_OWNER"))
+                        name.set(System.getenv("GITHUB_OWNER"))
+                    }
+                }
+            }
+
+        }
+    }
+}
