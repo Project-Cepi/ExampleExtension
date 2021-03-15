@@ -16,7 +16,7 @@ plugins {
     // Apply the application plugin to add support for building a jar
     java
     // Dokka documentation w/ kotlin
-    id("org.jetbrains.dokka") version "1.4.20"
+    id("org.jetbrains.dokka") version "1.4.30"
 }
 
 repositories {
