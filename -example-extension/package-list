@@ -1,5 +1,9 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
-
+$dokka.location:world.cepi.example////PointingToDeclaration/-example-extension/world.cepi.example/index.html
+$dokka.location:world.cepi.example/ExampleExtension///PointingToDeclaration/-example-extension/world.cepi.example/-example-extension/index.html
+$dokka.location:world.cepi.example/ExampleExtension/ExampleExtension/#/PointingToDeclaration/-example-extension/world.cepi.example/-example-extension/-example-extension.html
+$dokka.location:world.cepi.example/ExampleExtension/initialize/#/PointingToDeclaration/-example-extension/world.cepi.example/-example-extension/initialize.html
+$dokka.location:world.cepi.example/ExampleExtension/terminate/#/PointingToDeclaration/-example-extension/world.cepi.example/-example-extension/terminate.html
 world.cepi.example
 
