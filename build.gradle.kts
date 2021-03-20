@@ -50,9 +50,14 @@ dependencies {
     // import kotlinx serialization
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 }
-
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+configurations {
+    testImplementation {
+        extendsFrom(configurations.compileOnly.get())
+    }
 }
 
 // Take gradle.properties and apply it to resources.
@@ -65,7 +70,7 @@ tasks {
     }
 
     // Set name, minimize, and merge service files
-    named<ShadowJar>("shadowJar") {
+    named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
         archiveBaseName.set(project.name)
         mergeServiceFiles()
         minimize()
@@ -86,3 +91,7 @@ java {
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+
+compileKotlin.kotlinOptions {
+    freeCompilerArgs = listOf("-Xinline-classes")
+}
