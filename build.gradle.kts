@@ -8,8 +8,6 @@ plugins {
     kotlin("plugin.serialization") version "1.4.21"
     // Shade the plugin
     id("com.github.johnrengelman.shadow") version "6.1.0"
-    // Add maven support
-    maven
     // Allow publishing
     `maven-publish`
 
