@@ -7,7 +7,7 @@ plugins {
     // Kotlinx serialization for any data format
     kotlin("plugin.serialization") version "1.4.21"
     // Shade the plugin
-    id("com.github.johnrengelman.shadow") version "6.1.0"
+    id("com.github.johnrengelman.shadow") version "7.0.0"
     // Allow publishing
     `maven-publish`
 
