@@ -26,6 +26,7 @@ repositories {
     maven(url = "https://libraries.minecraft.net")
     maven(url = "https://jitpack.io")
     maven(url = "https://jcenter.bintray.com/")
+    maven(url = "https://repo.velocitypowered.com/snapshots/")
 }
 
 dependencies {
