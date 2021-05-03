@@ -18,10 +18,9 @@ plugins {
 }
 
 repositories {
-    // Use jcenter for resolving dependencies.
-    jcenter()
-
     // Use mavenCentral
+    mavenCentral()
+    
     maven(url = "https://repo1.maven.org/maven2/")
     maven(url = "https://repo.spongepowered.org/maven")
     maven(url = "https://libraries.minecraft.net")
