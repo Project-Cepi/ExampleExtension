@@ -43,7 +43,7 @@ dependencies {
     compileOnly("com.github.Minestom:Minestom:-SNAPSHOT")
 
     // import kotlinx serialization
-    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.0")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 }
 tasks.withType<Test> {
     useJUnitPlatform()
