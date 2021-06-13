@@ -27,7 +27,6 @@ repositories {
     maven(url = "https://repo.velocitypowered.com/snapshots/")
 }
 
-
 dependencies {
     // Align versions of all Kotlin components
     compileOnly(platform("org.jetbrains.kotlin:kotlin-bom"))
