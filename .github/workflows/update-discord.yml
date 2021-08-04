@@ -25,9 +25,11 @@ jobs:
 
       # Installs a quickie Kotlin runtime
       - uses: fwilhe2/setup-kotlin@0.2.0
+        with:
+          version: 1.5.21
       
       - name: Update Discord
         env:
-          DISCORD_KEY = ${{ secrets.DISCORD_KEY }}
-        run: kotlin update-commit.main.kts ${{ github.repo_name }} ${{ github.sha }}
+          DISCORD_KEY: ${{ secrets.DISCORD_KEY }}
+        run: kotlinc -script -jvm-target 1.8 update-commit.main.kts ${{ github.repository }} ${{ github.sha }}
 
