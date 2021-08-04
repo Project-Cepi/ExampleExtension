@@ -8,7 +8,7 @@ import dev.kord.core.behavior.edit
 import dev.kord.core.entity.channel.TextChannel
 import kotlinx.coroutines.runBlocking
 
-val repoName = args[0]
+val repoName = args[0].removePrefix("Project-Cepi/")
 val commitHash = args[1].take(10)
 
 runBlocking {
