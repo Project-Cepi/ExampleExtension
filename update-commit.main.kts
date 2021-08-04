@@ -14,8 +14,8 @@ val commitHash = args[1].take(10)
 runBlocking {
     val bot = Kord(System.getenv("DISCORD_KEY"))
 
-    val channel = bot.getChannel(Snowflake(714982475004117065))!! as TextChannel
-    channel.getMessage(Snowflake(872499032025620500)).edit {
+    val channel = bot.getChannel(Snowflake(872557055934890095))!! as TextChannel
+    channel.getMessage(Snowflake(872557344029020190)).edit {
 
         if (embed == null) embed {
             field {
