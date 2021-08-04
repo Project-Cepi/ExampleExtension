@@ -29,5 +29,5 @@ jobs:
       - name: Update Discord
         env:
           DISCORD_KEY: ${{ secrets.DISCORD_KEY }}
-        run: kotlin update-commit.main.kts ${{ github.repo_name }} ${{ github.sha }}
+        run: kotlin update-commit.main.kts ${{ github.repo_name }} ${{ github.sha }} -jvm-target 1.6
 
