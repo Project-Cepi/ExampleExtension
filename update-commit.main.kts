@@ -21,25 +21,11 @@ runBlocking {
         this.content = ""
 
         if (embed == null) embed {
-            field {
-                name = repoName
-                value = "Latest commit: `$commitHash`"
-            }
-
-            color = Color(0xff0000)
-        }
-
-        else embed?.apply {
-            if (fields.none { it.name == repoName }) field {
-                name = repoName
-                value = "Latest commit: $commitHash"
-            }
-            else fields.replaceAll {
-                return@replaceAll if (it.name == repoName) it.also { field {
-                    name = repoName
-                    value = "Latest commit: $commitHash"
-                } } else it
-            }
+            field(repoName) { "Latest commit: `$commitHash" }
+        } else embed?.apply {
+            val field = fields.firstOrNull { it.name == repoName }
+            if (field == null) field(repoName) { "Latest commit: `$commitHash" }
+            else field.value = "Latest commit: $commitHash"
         }
     }
 }
