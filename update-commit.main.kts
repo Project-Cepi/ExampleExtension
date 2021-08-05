@@ -18,6 +18,7 @@ runBlocking {
 
     val channel = bot.getChannel(Snowflake(872557055934890095))!! as TextChannel
     channel.getMessage(Snowflake(872557344029020190)).edit {
+        this.content = ""
 
         if (embed == null) embed {
             field {
