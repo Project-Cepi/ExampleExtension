@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Update Discord
 
 # Controls when the workflow will run
 on:
@@ -31,5 +31,5 @@ jobs:
       - name: Update Discord
         env:
           DISCORD_KEY: ${{ secrets.DISCORD_KEY }}
-        run: kotlinc -script -jvm-target 1.8 update-commit.main.kts ${{ github.repository }} ${{ github.sha }}
+        run: kotlinc -script -jvm-target 1.8 update-commit.kts ${{ github.repository }} ${{ github.sha }}
 
