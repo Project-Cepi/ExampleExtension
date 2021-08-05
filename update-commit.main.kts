@@ -1,4 +1,4 @@
-@file:DependsOn("io.github.microutils:kotlin-logging:2.0.6")
+@file:DependsOn("io.github.microutils:kotlin-logging-jvm:2.0.6")
 @file:DependsOn("org.slf4j:slf4j-simple:1.7.30")
 @file:DependsOn("dev.kord:kord-core:0.7.4")
 
