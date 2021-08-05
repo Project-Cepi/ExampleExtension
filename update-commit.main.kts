@@ -41,6 +41,4 @@ runBlocking {
             }
         }
     }
-
-    bot.login()
 }
