@@ -21,7 +21,7 @@ runBlocking {
     channel.getMessage(Snowflake(872557344029020190)).edit {
         this.content = ""
 
-        if (embeds?.isEmpty() == true) embed {
+        if (embeds.isNullOrEmpty()) embed {
             field(repoName) { "Latest commit: `$commitHash" }
             color = Color(0xFF0000)
         } else embeds?.get(0)?.apply {
