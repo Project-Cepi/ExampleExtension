@@ -22,7 +22,7 @@ runBlocking {
         this.content = ""
 
         if (embeds.isNullOrEmpty()) embed {
-            field(repoName) { "Latest commit: `$commitHash" }
+            field(repoName) { "Latest commit: `$commitHash`" }
             color = Color(0xFF0000)
         } else embeds?.get(0)?.apply {
             val field = fields.firstOrNull { it.name == repoName }
