@@ -26,7 +26,7 @@ runBlocking {
             color = Color(0xFF0000)
         } else embeds?.get(0)?.apply {
             val field = fields.firstOrNull { it.name == repoName }
-            if (field == null) field(repoName) { "Latest commit: `$commitHash" }
+            if (field == null) field(repoName) { "Latest commit: `$commitHash`" }
             else field.value = "Latest commit: $commitHash"
         }
     }
