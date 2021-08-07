@@ -23,10 +23,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
             
+      - name: Change Permissions
+        run: chmod +x ./discord-updater
+        
       - name: Update Discord
         env:
           DISCORD_KEY: ${{ secrets.DISCORD_KEY }}
-        run: | 
-          chmod +x ./discord-updater
-          ./discord-updater ${{ github.repository }} ${{ github.sha }}
+        run: ./discord-updater
+      
         
