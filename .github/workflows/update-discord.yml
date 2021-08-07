@@ -29,6 +29,6 @@ jobs:
       - name: Update Discord
         env:
           DISCORD_KEY: ${{ secrets.DISCORD_KEY }}
-        run: ./discord-updater
+        run: ./discord-updater ${{ github.repository }} ${{ github.sha }}
       
         
