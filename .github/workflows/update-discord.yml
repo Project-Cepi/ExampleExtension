@@ -27,7 +27,6 @@ jobs:
         env:
           DISCORD_KEY: ${{ secrets.DISCORD_KEY }}
         run: | 
-          sudo apt install glibc
           chmod +x ./discord-updater
           ./discord-updater ${{ github.repository }} ${{ github.sha }}
         
