@@ -13,12 +13,14 @@ Drop it into the `/extensions` folder.
 Create a folder, then
 Clone the repository using:
 
-`git clone https://github.com/Project-Cepi/Sabre.git`
+`git clone https://github.com/Project-Cepi/ExampleExtension.git`
 
 Once it is cloned, make sure you have gradle installed, and run
 
-`./gradlew shadowJar` on Mac or Linux, and
+`./gradlew build` on Mac or Linux, and
 
-`gradlew shadowJar` on Windows.
+`gradlew build` on Windows.
 
 This will output the jar to `build/libs` in the project directory.
+
+**Make sure to select the -all jar**. If no shading is necessary, remove the `shadowJar`
