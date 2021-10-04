@@ -4,7 +4,7 @@ pull_request_rules:
       - author=renovate[bot]
       - title~=(dependency|plugin)
       - -merged
-      - check-success~=CI
+      - check-success=CI Check
     actions:
       merge:
         method: merge
