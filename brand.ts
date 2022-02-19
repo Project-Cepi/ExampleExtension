@@ -2,14 +2,24 @@ import { dirname } from "https://deno.land/std@0.126.0/path/mod.ts";
 import { ensureFile } from "https://deno.land/std@0.126.0/fs/mod.ts";
 import { prompt, Input, Number, Confirm, Checkbox } from "https://deno.land/x/cliffy/prompt/mod.ts";
 
-const fullDirectoryName = dirname(new URL('', import.meta.url).pathname)
-const directoryName = (fullDirectoryName.match(/\w+(?!\/)$/) as string[])[0]
-const assumedPackageName = (directoryName.match(/^(?:(?!Extension).)*/i) as string[])[0].toLowerCase()
+const generatePackageName = (projectName: string) => (projectName.match(/^(?:(?!Extension).)*/i) as string[])[0].toLowerCase()
+
+let fullDirectoryName = dirname(new URL('', import.meta.url).pathname)
+let directoryName = (fullDirectoryName.match(/\w+(?!\/)$/) as string[])[0]
+let assumedPackageName = generatePackageName(directoryName)
 
 const result = await prompt([{
     name: "projectName",
     message: `Enter the project name (${directoryName}).`,
-    type: Input
+    type: Input,
+    after: async ({ projectName }, next) => { // executed after like prompt
+        if (projectName) {
+            directoryName = projectName
+            assumedPackageName = generatePackageName(directoryName)
+        }
+
+        await next()
+    },
 }, {
     name: "preferredMainClass",
     message: `Enter the preferred class name (${directoryName}).`,
