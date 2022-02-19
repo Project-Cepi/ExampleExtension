@@ -1,4 +1,5 @@
 import { dirname } from "https://deno.land/std@0.126.0/path/mod.ts";
+import { ensureDir } from "https://deno.land/std@0.126.0/fs/mod.ts";
 
 const directoryName = dirname(new URL('', import.meta.url).pathname).match(/\w+(?!\/)$/)
 
@@ -7,14 +8,21 @@ const preferredMainClass = prompt(`Enter preferred class name (${projectName}):`
 const packageName = prompt(`Enter package name (ex example):`)
 const description = prompt(`Enter description:`)
 
-Deno.writeTextFile("./gradle.properties", `# suppress inspection "UnusedProperty" for whole file - used in extension.json
+const paths = {
+    properties: "./gradle.properties",
+    readme: "./README.md",
+    settings: "./settings.gradle.kts",
+    dir: `./src/main/kotlin/world/cepi/${packageName}`
+}
+
+await Deno.writeTextFile(paths.properties, `# suppress inspection "UnusedProperty" for whole file - used in extension.json
 kotlin.code.style=official
 name=${projectName}
 mainClass=${preferredMainClass}
 group=world.cepi.${packageName}
 version=1.0.0`)
 
-Deno.writeTextFile("./README.md", `# ${projectName}
+await Deno.writeTextFile(paths.readme, `# ${projectName}
 [![license](https://img.shields.io/github/license/Project-Cepi/${projectName}?style=for-the-badge&color=b2204c)](../LICENSE)
 [![wiki](https://img.shields.io/badge/documentation-wiki-74aad6?style=for-the-badge)](https://project-cepi.github.io/)
 [![discord-banner](https://img.shields.io/discord/706185253441634317?label=discord&style=for-the-badge&color=7289da)](https://discord.cepi.world/8K8WMGV)
@@ -46,12 +54,14 @@ This will output the jar to \`build/libs\` in the project directory.
 **Make sure to select the -all jar**. If no shading is necessary, remove the \`shadowJar\`
 `)
 
-Deno.writeTextFile("./settings.gradle.kts", `rootProject.name = "${projectName}"
+await Deno.writeTextFile(paths.settings, `rootProject.name = "${projectName}"
 `)
 
-Deno.remove("./src/main", { recursive: true })
+await Deno.remove("./src/main", { recursive: true })
 
-Deno.writeTextFile(`./src/main/kotlin/world/cepi/${packageName}/${preferredMainClass}.kt`, `package world.cepi.${packageName}
+await ensureDir(paths.dir)
+
+await Deno.writeTextFile(`${paths.dir}/${preferredMainClass}.kt`, `package world.cepi.${packageName}
 
 import net.minestom.server.extensions.Extension;
 
@@ -67,5 +77,12 @@ class ExampleExtension : Extension() {
         logger().info("[${projectName}] has been disabled!")
     }
 
+}
+`)
+
+await Deno.writeTextFile(`${paths.dir}/${preferredMainClass}.kt`, `{
+    "entrypoint": "${project.group}.${project.mainClass}",
+    "name": "${project.name}",
+    "version": "${project.version}"
 }
 `)
