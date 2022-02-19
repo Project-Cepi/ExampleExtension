@@ -1,6 +1,7 @@
 import { dirname } from "https://deno.land/std@0.126.0/path/mod.ts";
 import { ensureFile } from "https://deno.land/std@0.126.0/fs/mod.ts";
-import { prompt, Input, Number, Confirm, Checkbox } from "https://deno.land/x/cliffy/prompt/mod.ts";
+import { prompt, Input } from "https://deno.land/x/cliffy/prompt/mod.ts";
+import { colors } from "https://deno.land/x/cliffy/ansi/colors.ts";
 
 const generatePackageName = (projectName: string) => (projectName.match(/^(?:(?!Extension).)*/i) as string[])[0].toLowerCase()
 
@@ -86,3 +87,5 @@ class ${projectName} : Extension() {
 
 }
 `)
+
+console.log(`🚀 ${colors.bold.green} Rebranded files!`)
