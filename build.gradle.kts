@@ -54,7 +54,7 @@ configurations {
 tasks {
     processResources {
         // Apply properties to extension.json
-        filesMatching("extension.json") {
+        filesMatching("META-INF/extension.json") {
             expand(project.properties)
         }
     }
@@ -92,7 +92,7 @@ publishing {
 }
 
 val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions.jvmTarget = JavaVersion.VERSION_16.toString()
+compileKotlin.kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
 
 compileKotlin.kotlinOptions {
     freeCompilerArgs = listOf("-Xinline-classes")
