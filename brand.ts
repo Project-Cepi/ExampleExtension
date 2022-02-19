@@ -1,12 +1,28 @@
 import { dirname } from "https://deno.land/std@0.126.0/path/mod.ts";
 import { ensureFile } from "https://deno.land/std@0.126.0/fs/mod.ts";
+import { prompt, Input, Number, Confirm, Checkbox } from "https://deno.land/x/cliffy/prompt/mod.ts";
 
 const directoryName = dirname(new URL('', import.meta.url).pathname).match(/\w+(?!\/)$/)
 
-const projectName = prompt(`Enter project name (${directoryName}):`) || directoryName
-const preferredMainClass = prompt(`Enter preferred class name (${projectName}):`) || projectName
-const packageName = prompt(`Enter package name (${projectName.toLowerCase()}):`) || projectName.toLowerCase()
-const description = prompt(`Enter description:`)
+const result = await prompt([{
+    name: "projectName",
+    message: "Enter the project name.",
+    type: Input,
+}, {
+    name: "preferredMainClass",
+    message: "Enter the preferred class name.",
+    type: Input,
+}, {
+    name: "packageName",
+    message: "Enter the preferred package name.",
+    type: Input
+}, {
+    name: "description",
+    message: "Enter project description.",
+    type: Input
+}]);
+
+const { projectName, preferredMainClass, packageName, description } = result
 
 const paths = {
     properties: "./gradle.properties",
