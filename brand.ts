@@ -5,7 +5,7 @@ const directoryName = dirname(new URL('', import.meta.url).pathname).match(/\w+(
 
 const projectName = prompt(`Enter project name (${directoryName}):`) || directoryName
 const preferredMainClass = prompt(`Enter preferred class name (${projectName}):`) || projectName
-const packageName = prompt(`Enter package name (ex example):`)
+const packageName = prompt(`Enter package name (${projectName.toLowerCase()}):`) || projectName.toLowerCase()
 const description = prompt(`Enter description:`)
 
 const paths = {
