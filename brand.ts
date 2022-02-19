@@ -6,23 +6,28 @@ const directoryName = dirname(new URL('', import.meta.url).pathname).match(/\w+(
 
 const result = await prompt([{
     name: "projectName",
-    message: "Enter the project name.",
-    type: Input,
+    message: `Enter the project name (${directoryName}).`,
+    type: Input
 }, {
     name: "preferredMainClass",
-    message: "Enter the preferred class name.",
-    type: Input,
+    message: `Enter the preferred class name (${directoryName}).`,
+    type: Input
 }, {
     name: "packageName",
-    message: "Enter the preferred package name.",
+    message: `Enter the preferred package name ${directoryName.toLowerCase()}.`,
     type: Input
 }, {
     name: "description",
     message: "Enter project description.",
-    type: Input
+    type: Input,
+    minLength: 1
 }]);
 
-const { projectName, preferredMainClass, packageName, description } = result
+const { projectName, preferredMainClass, packageName, description } = Object.assign({
+    projectName: directoryName,
+    preferredMainClass: directoryName,
+    packageName: directoryName.toLowerCase()
+}, result)
 
 const paths = {
     properties: "./gradle.properties",
