@@ -88,4 +88,4 @@ class ${projectName} : Extension() {
 }
 `)
 
-console.log(`🚀 ${colors.bold.green} Rebranded files!`)
+console.log("🚀", colors.bold.green("Rebranded files"))
