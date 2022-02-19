@@ -8,13 +8,13 @@ const generatePackageName = (projectName: string) => (projectName.match(/^(?:(?!
 const fullDirectoryName = dirname(new URL('', import.meta.url).pathname)
 const directoryName = (fullDirectoryName.match(/\w+(?!\/)$/) as string[])[0]
 
-const projectName = await Input.prompt(`Enter the project name (${directoryName})`) || directoryName
-const preferredMainClass = await Input.prompt(`Enter the preferred class name (${projectName}).`) || projectName
+const projectName: string = await Input.prompt(`Enter the project name (${directoryName})`) || directoryName
+const preferredMainClass: string = await Input.prompt(`Enter the preferred class name (${projectName}).`) || projectName
 
 const assumedPackageName = generatePackageName(projectName)
 
-const packageName = await Input.prompt(`Enter the preferred package name (${assumedPackageName}).`) || assumedPackageName
-const description = await Input.prompt({ message: "Enter project description.", minLength: 1 })
+const packageName: string = await Input.prompt(`Enter the preferred package name (${assumedPackageName}).`) || assumedPackageName
+const description: string = await Input.prompt({ message: "Enter project description.", minLength: 1 })
 
 const paths = {
     properties: "./gradle.properties",
