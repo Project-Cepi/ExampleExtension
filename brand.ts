@@ -12,7 +12,7 @@ const preferredMainClass = await Input.prompt(`Enter the preferred class name ($
 
 const assumedPackageName = generatePackageName(projectName)
 
-const packageName = await Input.prompt(`Enter the preferred package name (${assumedPackageName}).`)
+const packageName = await Input.prompt(`Enter the preferred package name (${assumedPackageName}).`) || assumedPackageName
 const description = await Input.prompt({ message: "Enter project description.", minLength: 1 })
 
 const paths = {
