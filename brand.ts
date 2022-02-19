@@ -20,7 +20,6 @@ const paths = {
     readme: "./README.md",
     settings: "./settings.gradle.kts",
     code: `./src/main/kotlin/world/cepi/${packageName}/${preferredMainClass}.kt`,
-    resource: `./src/main/resources/META-INF/extension.json`
 }
 
 await Deno.writeTextFile(paths.properties, `# suppress inspection "UnusedProperty" for whole file - used in extension.json
@@ -65,7 +64,7 @@ This will output the jar to \`build/libs\` in the project directory.
 await Deno.writeTextFile(paths.settings, `rootProject.name = "${projectName}"
 `)
 
-await Deno.remove("./src/main", { recursive: true })
+await Deno.remove("./src/main/kotlin", { recursive: true })
 
 await ensureFile(paths.code)
 
@@ -85,14 +84,5 @@ class ${projectName} : Extension() {
         logger().info("[${projectName}] has been disabled!")
     }
 
-}
-`)
-
-await ensureFile(paths.resource)
-
-await Deno.writeTextFile(paths.resource, `{
-    "entrypoint": "\${project.group}.\${project.mainClass}",
-    "name": "\${project.name}",
-    "version": "\${project.version}"
 }
 `)
