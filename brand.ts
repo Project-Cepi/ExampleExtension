@@ -3,8 +3,8 @@ import { ensureFile } from "https://deno.land/std@0.126.0/fs/mod.ts";
 import { prompt, Input, Number, Confirm, Checkbox } from "https://deno.land/x/cliffy/prompt/mod.ts";
 
 const fullDirectoryName = dirname(new URL('', import.meta.url).pathname)
-const directoryName = (fullDirectoryName.match(/\w+(?!\/)$/) as string[])[0] as string
-const assumedPackageName = (directoryName.match(/\w+(?=Extension|$)/i) as string[])[0] as string
+const directoryName = (fullDirectoryName.match(/\w+(?!\/)$/) as string[])[0]
+const assumedPackageName = (directoryName.match(/\w+(?=Extension|$)/i) as string[])[0]
 
 const result = await prompt([{
     name: "projectName",
@@ -16,7 +16,7 @@ const result = await prompt([{
     type: Input
 }, {
     name: "packageName",
-    message: `Enter the preferred package name ${packageName}.`,
+    message: `Enter the preferred package name ${assumedPackageName}.`,
     type: Input
 }, {
     name: "description",
