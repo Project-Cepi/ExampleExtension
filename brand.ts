@@ -89,7 +89,7 @@ await Deno.writeTextFile(paths.code, `package world.cepi.${packageName}
 
 import net.minestom.server.extensions.Extension;
 
-class ExampleExtension : Extension() {
+class ${projectName} : Extension() {
 
     override fun initialize(): LoadStatus {
         logger().info("[${projectName}] has been enabled!")
