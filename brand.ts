@@ -12,7 +12,6 @@ const paths = {
     properties: "./gradle.properties",
     readme: "./README.md",
     settings: "./settings.gradle.kts",
-    resource: `./src/main/resources`
     code: `./src/main/kotlin/world/cepi/${packageName}/${preferredMainClass}.kt`,
     resource: `./src/main/resources/META-INF/extension.json`
 }
@@ -82,9 +81,9 @@ class ExampleExtension : Extension() {
 }
 `)
 
-await ensureFile(paths.resources)
+await ensureFile(paths.resource)
 
-await Deno.writeTextFile(paths.resources, `{
+await Deno.writeTextFile(paths.resource, `{
     "entrypoint": "\${project.group}.\${project.mainClass}",
     "name": "\${project.name}",
     "version": "\${project.version}"
