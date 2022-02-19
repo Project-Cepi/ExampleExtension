@@ -4,7 +4,7 @@ import { prompt, Input, Number, Confirm, Checkbox } from "https://deno.land/x/cl
 
 const fullDirectoryName = dirname(new URL('', import.meta.url).pathname)
 const directoryName = (fullDirectoryName.match(/\w+(?!\/)$/) as string[])[0]
-const assumedPackageName = (directoryName.match(/\w+(?=Extension|$)/i) as string[])[0]
+const assumedPackageName = (directoryName.match(/^(?:(?!Extension).)*/i) as string[])[0].toLowerCase()
 
 const result = await prompt([{
     name: "projectName",
@@ -16,7 +16,7 @@ const result = await prompt([{
     type: Input
 }, {
     name: "packageName",
-    message: `Enter the preferred package name ${assumedPackageName}.`,
+    message: `Enter the preferred package name (${assumedPackageName}).`,
     type: Input
 }, {
     name: "description",
