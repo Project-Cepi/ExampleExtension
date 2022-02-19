@@ -5,6 +5,13 @@
 
 An example extension for Minestom based off of Sabre/kotlin libs.
 
+## Branding
+If you're trying to quickly rebrand an ExampleExtension, first, install [deno](https://deno.land)
+
+```bash
+deno run --allow-read --allow-write brand.ts
+```
+
 ## Installation
 
 Download the jar from [Releases](https://github.com/Project-Cepi/ExampleExtension/releases)
