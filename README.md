@@ -9,7 +9,7 @@ An example extension for Minestom based off of Sabre/kotlin libs.
 If you're trying to quickly rebrand an ExampleExtension, first, install [deno](https://deno.land)
 
 ```bash
-deno run --allow-read --allow-write brand.ts
+deno run --allow-read --unstable --allow-write brand.ts
 ```
 
 ## Installation
