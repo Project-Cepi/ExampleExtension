@@ -1,5 +1,5 @@
 import { dirname } from "https://deno.land/std@0.126.0/path/mod.ts";
-import { ensureDir } from "https://deno.land/std@0.126.0/fs/mod.ts";
+import { ensureFile } from "https://deno.land/std@0.126.0/fs/mod.ts";
 
 const directoryName = dirname(new URL('', import.meta.url).pathname).match(/\w+(?!\/)$/)
 
@@ -12,7 +12,9 @@ const paths = {
     properties: "./gradle.properties",
     readme: "./README.md",
     settings: "./settings.gradle.kts",
-    dir: `./src/main/kotlin/world/cepi/${packageName}`
+    resource: `./src/main/resources`
+    code: `./src/main/kotlin/world/cepi/${packageName}/${preferredMainClass}.kt`,
+    resource: `./src/main/resources/META-INF/extension.json`
 }
 
 await Deno.writeTextFile(paths.properties, `# suppress inspection "UnusedProperty" for whole file - used in extension.json
@@ -59,9 +61,9 @@ await Deno.writeTextFile(paths.settings, `rootProject.name = "${projectName}"
 
 await Deno.remove("./src/main", { recursive: true })
 
-await ensureDir(paths.dir)
+await ensureFile(paths.code)
 
-await Deno.writeTextFile(`${paths.dir}/${preferredMainClass}.kt`, `package world.cepi.${packageName}
+await Deno.writeTextFile(paths.code, `package world.cepi.${packageName}
 
 import net.minestom.server.extensions.Extension;
 
@@ -80,7 +82,9 @@ class ExampleExtension : Extension() {
 }
 `)
 
-await Deno.writeTextFile(`${paths.dir}/${preferredMainClass}.kt`, `{
+await ensureFile(paths.resources)
+
+await Deno.writeTextFile(paths.resources, `{
     "entrypoint": "\${project.group}.\${project.mainClass}",
     "name": "\${project.name}",
     "version": "\${project.version}"
