@@ -81,8 +81,8 @@ class ExampleExtension : Extension() {
 `)
 
 await Deno.writeTextFile(`${paths.dir}/${preferredMainClass}.kt`, `{
-    "entrypoint": "${project.group}.${project.mainClass}",
-    "name": "${project.name}",
-    "version": "${project.version}"
+    "entrypoint": "\${project.group}.\${project.mainClass}",
+    "name": "\${project.name}",
+    "version": "\${project.version}"
 }
 `)
