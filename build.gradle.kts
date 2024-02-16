@@ -41,7 +41,7 @@ dependencies {
     compileOnly("com.github.Minestom:Minestom:4a976a3333")
 
     // import kotlinx serialization
-    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 }
 
 configurations {
